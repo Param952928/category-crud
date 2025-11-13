@@ -1,21 +1,24 @@
 /** @type {import('jest').Config} */
 module.exports = {
-  preset: undefined,
+  preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
   roots: ['<rootDir>/tests'],
   moduleFileExtensions: ['ts', 'js', 'json'],
   verbose: true,
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+  globals: {
+    'ts-jest': {
+      useESM: true,
+      tsconfig: {
+        module: 'ESNext'
+      }
+    }
+  },
   transform: {
     '^.+\\.(ts|tsx)$': [
-      'babel-jest',
+      'ts-jest',
       {
-        babelrc: false,
-        configFile: false,
-        presets: [
-          ['@babel/preset-env', { targets: { node: 'current' } }],
-          ['@babel/preset-typescript', { allowDeclareFields: true }]
-        ]
+        useESM: true
       }
     ]
   },

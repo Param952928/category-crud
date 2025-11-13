@@ -1,11 +1,8 @@
 import request from 'supertest';
 import app from '../src/app.js';
-import { disconnectDB } from '../src/db/mongoose.js';
 
 describe('Auth API', () => {
-  afterAll(async () => {
-    await disconnectDB();
-  });
+  
 
   it('registers a user and returns token', async () => {
     const res = await request(app)
